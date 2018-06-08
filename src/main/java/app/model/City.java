@@ -20,6 +20,7 @@ public class City implements Serializable {
     @Column(name = "countrycode")
     private String countryCode;
 
+
     private Long population;
 
     public City(Long id, @NotBlank String name,

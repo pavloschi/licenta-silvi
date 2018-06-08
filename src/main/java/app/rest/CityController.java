@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/city")
@@ -17,10 +16,17 @@ public class CityController {
     CityRepository cityRepository;
 
     //Get all cities
-    @GetMapping("/find")
-    public List<City> getAllCities() {
+    @GetMapping(value = "/find")
+    public List<City> getAllCities(@RequestParam(value = "countryCode", required = false) String countryCode) {
+
+        if(countryCode != null && !countryCode.isEmpty()){
+            return cityRepository.findByCountryCode(countryCode);
+        }
         return cityRepository.findAll();
+
     }
+
+
 
     //Create a new City
     @PostMapping("/add")
